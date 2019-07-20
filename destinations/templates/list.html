@@ -5,12 +5,23 @@
 {% block content %}
 <br>
 <div class="row">
-  {% for destination in destinations %}
-  <a href="{% url 'destination-detail' destination.id %}">
-    <img src="{{destination.pretty_picture.url}}" />
-    <p>{{destination.name}}</p>
-    <p>{{destination.activities}}</p>
-  </a>
-  {% endfor %}
+    {% for destination in destinations %}
+    <div class="col-md-4" >
+        <div class="card my-card" style="margin-bottom:10px">
+          {% if destination.pretty_picture %}
+            <img class="card-img-top" src="{{destination.pretty_picture.url}}" alt="{{destination.name}}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{destination.name}}</h5>
+            <p class="card-text">{{destination.activities}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center">
+                <a href="{% url 'destination-detail' destination.id %}" class="btn btn-outline-dark">View</a>
+            </li>
+          </ul>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock content %}
